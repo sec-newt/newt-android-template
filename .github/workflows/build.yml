@@ -22,7 +22,7 @@ concurrency:
 jobs:
   newt:
     name: Newt
-    uses: sec-newt/newt-android-lib/.github/workflows/newt-app.yml@bbc810a39283566d7c4da6e3e31b325c710c0949 # testing
+    uses: sec-newt/newt-android-lib/.github/workflows/newt-app.yml@94d869706391b508162e8eda7084f7d90e086f02 # testing
     # The app's names, used for the test APK and release files. scripts/new-app.sh sets these.
     with:
       app-slug: newt-template
@@ -30,7 +30,10 @@ jobs:
     secrets:
       SIGNING_KEYSTORE_BASE64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
       SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
-    # Publishing a release needs write access; every other job only reads.
+    # The most any shared job needs: publishing a release writes, CodeQL reports security
+    # findings. Each job inside newt-app.yml asks only for what it uses.
     permissions:
       contents: write
       packages: read
+      actions: read
+      security-events: write
