@@ -4,8 +4,9 @@ The starting point for every Newt app (like [Newt Phone](https://github.com/sec-
 and [Newt Home](https://github.com/sec-newt/newt-home)). It's a tiny working app with
 the shared Newt pieces already in place:
 
-- **The Newt look:** Tokyo Night theme, the bundled fonts (Chakra Petch, Atkinson
-  Hyperlegible, JetBrains Mono) and the newt icon, following [NEWT_STYLE.md](NEWT_STYLE.md).
+- **The Newt look** from the shared [Newt library](https://github.com/sec-newt/newt-android-lib):
+  Tokyo Night theme, the bundled fonts and shared headers and outlines, following
+  [NEWT_STYLE.md](NEWT_STYLE.md). Plus the newt icon, which each app gives its own badge.
 - **The CI checks:** tests with screenshots in light, dark and 200% text, accessibility
   checks, lint, a secret scan, a permission allowlist, and signed releases from `main`.
 - **Security files:** `SECURITY.md`, Dependabot, actions pinned to exact versions, and
@@ -25,6 +26,6 @@ the shared Newt pieces already in place:
 
 ## Keeping apps in step
 
-A template is copied once; later changes here don't reach existing apps. When something
-shared changes (the theme, the workflow, the style guide), copy it into each app by hand
-for now. A shared Newt library is the long-term fix.
+The look stays in step on its own: change it in the Newt library, publish a new version,
+and each app gets a Dependabot pull request. Everything else here (the workflow, scripts,
+docs) is copied once, so later changes to the template don't reach existing apps.
