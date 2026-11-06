@@ -6,6 +6,10 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.github.takahirom.roborazzi.RobolectricDeviceQualifiers
 import io.github.secnewt.test.newtScreenshot
+import androidx.compose.ui.test.onNodeWithContentDescription
+import androidx.compose.ui.test.assertIsOff
+import androidx.compose.ui.test.assertIsOn
+import androidx.compose.ui.test.performClick
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -37,4 +41,12 @@ class WelcomeScreenTest {
 
     @Test
     fun welcomeLargeText() = composeRule.newtScreenshot("welcome-200pct", dark = true, fontScale = 2f) { WelcomeScreen() }
+
+    @Test
+    fun theSampleUsesTheSharedPieces() {
+        composeRule.setContent { io.github.secnewt.ui.NewtTheme(darkTheme = true) { WelcomeScreen() } }
+        composeRule.onNodeWithContentDescription("Right now. A Newt app: big type, no permissions, no internet.").assertExists()
+        composeRule.onNodeWithText("Example switch").assertIsOff().performClick()
+        composeRule.onNodeWithText("Example switch").assertIsOn()
+    }
 }
